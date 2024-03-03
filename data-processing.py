@@ -22,3 +22,12 @@ plt.ylabel('Hydration Level')
 plt.xticks(rotation=45)
 plt.legend()
 plt.show()
+
+
+# Create a folder named 'visualizations' if it doesn't exist
+output_folder = 'visualizations'
+os.makedirs(output_folder, exist_ok=True)
+
+# Save the image to the 'visualizations' folder
+output_path = os.path.join(output_folder, 'hydration_over_time.png')
+plt.savefig(output_path)
