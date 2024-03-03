@@ -3,7 +3,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 # Load the product and user data
 df_products = pd.read_csv("data/acie_product.csv")
-df_users = pd.read_csv("data/skincare.csv")
+df_users = pd.read_csv("data/user_profile.csv")
 
 # For simplicity, let's create a user-product interaction matrix with random interactions
 import numpy as np
