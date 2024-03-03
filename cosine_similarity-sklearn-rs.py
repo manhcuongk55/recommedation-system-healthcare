@@ -17,21 +17,20 @@ df_interactions = pd.DataFrame(interaction_matrix, columns=df_products['_id'].va
 # Calculate item-item similarity (cosine similarity)
 item_similarity = cosine_similarity(df_interactions.T)
 
-# Function to get product recommendations for a given product
-def get_product_recommendations(product_id, item_similarity=item_similarity, num_recommendations=5):
-    product_idx = df_products[df_products['_id'] == product_id].index
-    if not product_idx.empty:
-        product_idx = product_idx[0]
-        similar_scores = item_similarity[product_idx]
-        similar_products = list(df_products['_id'].iloc[np.argsort(similar_scores)[::-1][1:num_recommendations + 1]])
-        return df_products[df_products['_id'].isin(similar_products)]
+# Function to get product recommendations for a given user
+def get_user_recommendations(user_id, item_similarity=item_similarity, num_recommendations=5):
+    user_idx = df_users[df_users['_id'] == user_id].index
+    if not user_idx.empty:
+        user_idx = user_idx[0]
+        user_scores = item_similarity[:, user_idx]
+        recommended_products = list(df_products['_id'].iloc[np.argsort(user_scores)[::-1][:num_recommendations]])
+        return df_products[df_products['_id'].isin(recommended_products)]
     else:
-        print(f"Product ID {product_id} not found.")
+        print(f"User ID {user_id} not found.")
         return None
 
-
 # Example usage
-product_id = '60e9f52eb5363725ef87e1b4'  # Replace with an actual product ID from your dataset
-recommendations = get_product_recommendations(product_id)
-print(f"Recommendations for product {product_id}:")
-print(recommendations)
+user_id = '64a70f2767b2c873f399bb4a'  # Replace with an actual user ID from your dataset
+user_recommendations = get_user_recommendations(user_id)
+print(f"Recommendations for user {user_id}:")
+print(user_recommendations)
