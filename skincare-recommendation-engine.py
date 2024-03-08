@@ -40,7 +40,9 @@ for i in data['clean_ingreds']:
         k += 1
 
 ingred_matrix = pd.DataFrame(one_hot_list).transpose()
+print("Before correction - Number of columns:", len(ingred_matrix.columns))  # Add this line
 ingred_matrix.columns = sorted(set(all_ingreds))  # Fix this line
+print("After correction - Number of columns:", len(ingred_matrix.columns))  # Add this line
 
 # Visualizing similarities
 svd = TruncatedSVD(n_components=150, n_iter=1000, random_state=6)
@@ -50,6 +52,7 @@ tsne_features = tsne.fit_transform(svd_features)
 
 data['X'] = tsne_features[:, 0]
 data['Y'] = tsne_features[:, 1]
+
 
 unique_types = ['Moisturiser', 'Serum', 'Oil', 'Mist', 'Balm', 'Mask', 'Peel',
                 'Eye Care', 'Cleanser', 'Toner', 'Exfoliator', 'Bath Salts',
