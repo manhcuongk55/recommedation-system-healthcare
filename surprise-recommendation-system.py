@@ -4,7 +4,7 @@ from surprise.model_selection import train_test_split
 from surprise.accuracy import rmse
 
 # Load user interactions data
-df_users = pd.read_csv("data/skincare.csv")
+df_users = pd.read_csv("data/user_profile.csv")
 df_products = pd.read_csv("data/acie_product.csv")
 
 # Merge data to get user-product interactions
