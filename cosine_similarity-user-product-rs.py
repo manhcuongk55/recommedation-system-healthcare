@@ -19,7 +19,7 @@ item_similarity = cosine_similarity(df_interactions.T)
 
 # Function to get product recommendations for a given user
 def get_user_recommendations(user_id, item_similarity=item_similarity, num_recommendations=5):
-    user_idx = df_users[df_users['_id_x'] == user_id].index
+    user_idx = df_users[df_users['_id'] == user_id].index
     if not user_idx.empty:
         user_idx = user_idx[0]
         user_scores = item_similarity[:, user_idx]
